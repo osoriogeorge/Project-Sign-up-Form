@@ -1,113 +1,140 @@
-/* 1. Use a more-intuitive box-sizing model */
+:root {
+  --background-color: wheat;
+  --focus-color: #4a90e2;
+  --padding-small: 10px;
+  --padding-medium: 15px;
+  --font-size-large: 3rem;
+  --box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  --font-family: "Poppins", sans-serif; /* Define font-family here */
+}
+
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
-/* 2. Remove default margin */
-* {
-  font-family: "Poppins", sans-serif;
+body {
+  background-color: var(--background-color);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-family);
+  font-size: 1rem;
+  font-weight: 500;
   margin: 0;
-  padding: 0;
 }
 
-body {
-  /* 3. Add accessible line-height */
-  line-height: 1.5;
-  /* 4. Improve text rendering */
-  -webkit-font-smoothing: antialiased;
-}
 #container {
-  width: 100vw;
-  height: 100vh;
-  padding: 20px;
   display: flex;
+  min-height: 100vh;
+  width: 100%;
 }
 
 .aside {
-  position: relative;
-  width: 40vh;
-  background: url(./images/simon-hermans-Ze7OZ8YLD-A-unsplash.jpg);
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  min-width: 40%;
+  background: url(./images/simon-hermans-Ze7OZ8YLD-A-unsplash.jpg) center/cover
+    no-repeat;
 }
 
-.aside-header {
+.aside-header,
+.aside-footer {
   color: white;
   text-align: center;
-  height: auto;
-  background-color: rgba(0, 0, 0, 0.7);
-  position: relative;
-  top: 10vh;
-  padding: 15px 0;
+  padding: var(--padding-small);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .aside-footer {
-  position: absolute; /* Cambiado de 'relative' a 'absolute' */
-  bottom: 0; /* Posiciona el footer en la parte inferior */
-  text-align: center;
-  width: 100%; /* Hace que el footer ocupe todo el ancho del contenedor */
-  padding: 15px 0;
-  color: white;
+  margin-top: auto;
 }
 
 main {
-  width: 60%;
-  padding: 20px;
+  flex: 1;
+  padding: var(--padding-medium);
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+h2 {
+  font-size: var(--font-size-large);
+  text-align: center;
+  align-content: center;
+  margin: 0;
+}
+
+.sign-up-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--padding-medium);
+  margin: 0 auto;
+  max-width: 600px;
+  padding: 0;
+}
+
+.form-row {
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
-  gap: 10px;
 }
 
-/* 5. Improve media defaults */
-img,
-picture,
-video,
-canvas,
-svg {
-  display: block;
-  max-width: 100%;
+.form-row label {
+  margin-bottom: 5px;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
-/* 6. Inherit fonts for form controls */
-input,
-button,
-textarea,
-select {
-  font: inherit;
+.form-row input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: var(--box-shadow);
 }
 
-/* 7. Avoid text overflows */
-p,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  overflow-wrap: break-word;
+button[type="submit"] {
+  grid-column: 1 / -1;
+  padding: 0.5rem 1rem;
+  background-color: var(--focus-color);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  text-transform: uppercase;
+  width: fit-content;
+  margin: 0 auto;
+  box-shadow: var(--box-shadow);
+  transition: background-color 0.3s ease;
 }
 
-/* 8. Improve line wrapping */
-p {
-  text-wrap: pretty;
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  text-wrap: balance;
+button[type="submit"]:hover {
+  background-color: #357abd;
 }
 
-/*
-    9. Create a root stacking context
-  */
-#root,
-#__next {
-  isolation: isolate;
+button[type="submit"]:focus {
+  outline: 2px solid var(--focus-color);
+  outline-offset: 2px;
+}
+
+.main-header,
+.main-footer {
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  #container {
+    flex-direction: row;
+  }
+
+  .aside {
+    width: 100%;
+    height: auto;
+  }
+
+  .sign-up-form {
+    grid-template-columns: 1fr;
+  }
 }
